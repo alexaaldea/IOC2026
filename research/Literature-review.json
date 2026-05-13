@@ -1,0 +1,55 @@
+{
+  "literatureReviews": [
+    {
+      "id": "586cf175-fa69-45a7-882f-095c374c222d",
+      "resourceName": "Radio UI",
+      "resourceUrl": "https://www.redbullracing.com/int-en/bulls-guide-to-team-radio",
+      "resourceInsights": "how teams communicate using the radio",
+      "comments": "",
+      "createdAt": "2026-02-26T07:04:27.728Z"
+    },
+    {
+      "id": "d042a787-5760-4611-8c3c-5ab79bf5c109",
+      "resourceName": "Pervasive Augmented Reality to support real-time data monitoring in industrial scenarios: Shop floor visualization evaluation and user study",
+      "resourceUrl": "https://www.sciencedirect.com/science/article/pii/S0097849323002686/",
+      "resourceInsights": "Industrial AR for data visualization and monitoring; compares AR vs. web interfaces",
+      "comments": "",
+      "createdAt": "2026-02-26T07:05:31.829Z"
+    },
+    {
+      "id": "47eca461-ff3c-4c48-a359-e70badaddab9",
+      "resourceName": "An Integrated Mobile Augmented Reality Digital Twin Monitoring System",
+      "resourceUrl": "https://www.mdpi.com/2073-431X/10/8/99",
+      "resourceInsights": "AR for real-time monitoring using mobile devices.",
+      "comments": "",
+      "createdAt": "2026-02-26T07:07:43.483Z"
+    },
+    {
+      "id": "6375a3e1-968d-4d22-a3b4-20eb797aff69",
+      "resourceName": "Designing for Cross-Device Interactions",
+      "resourceUrl": "https://discovery.ucl.ac.uk/id/eprint/10091079/1/Frederik%20Brudy%20-%20PhD%20Thesis.pdf",
+      "resourceInsights": "Research on interaction designs that span multiple devices (smartphones, wearables, AR)",
+      "comments": "",
+      "createdAt": "2026-02-26T07:10:48.438Z"
+    },
+    {
+      "id": "2503e230-1b03-499d-a5cc-35f82843e7d0",
+      "resourceName": "HCI in Mobile and Wearable Computing – Interface Design & Interaction",
+      "resourceUrl": "https://www.ijert.org/hci-in-mobile-and-wearable-computing",
+      "resourceInsights": "Covers AR, gesture, context awareness, cross-device ties.",
+      "comments": "",
+      "createdAt": "2026-02-26T07:11:26.917Z"
+    },
+    {
+      "id": "8343b7f7-0f4f-4732-b168-1d1248c10d3f",
+      "resourceName": "Visualizing Information on Smartwatch Faces: A Review & Design Space",
+      "resourceUrl": "https://journals.sagepub.com/doi/10.1177/14738716251360339",
+      "resourceInsights": "Systematic overview of smartwatch visualization patterns.",
+      "comments": "",
+      "createdAt": "2026-02-26T07:22:15.000Z"
+    }
+  ],
+  "observationalResearch": [],
+  "competitiveAnalysis": [],
+  "userInterviews": []
+}
