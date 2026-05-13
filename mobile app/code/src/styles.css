@@ -1,0 +1,197 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 2px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-cyan: var(--cyan);
+  --color-mint: var(--mint);
+  --color-warn: var(--warn);
+  --color-racing-red: var(--racing-red);
+  --color-carbon: var(--carbon);
+  --color-success: var(--success);
+}
+
+:root {
+  /* 6px radius across the board */
+  --radius: 0.375rem;
+
+  /* Flat matte deep charcoal */
+  --background: oklch(0.18 0.002 270);
+  --foreground: oklch(0.94 0.003 270);
+  --card: oklch(0.20 0.003 270);
+  --card-foreground: oklch(0.94 0.003 270);
+  --popover: oklch(0.20 0.003 270);
+  --popover-foreground: oklch(0.94 0.003 270);
+
+  /* Mint Green (#76FF03 vibe) — positive / primary */
+  --mint: oklch(0.86 0.24 135);
+  --primary: var(--mint);
+  --primary-foreground: oklch(0.15 0.005 270);
+
+  --secondary: oklch(0.24 0.005 270);
+  --secondary-foreground: oklch(0.94 0.003 270);
+  --muted: oklch(0.24 0.004 270);
+  --muted-foreground: oklch(0.66 0.01 270);
+  --accent: oklch(0.28 0.01 270);
+  --accent-foreground: oklch(0.94 0.003 270);
+
+  /* Racing Red — destructive / abort */
+  --racing-red: oklch(0.62 0.26 25);
+  --destructive: var(--racing-red);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  /* Subtle hairline borders (~ #333) */
+  --border: oklch(0.30 0.003 270);
+  --input: oklch(0.28 0.005 270);
+  --ring: var(--mint);
+
+  /* Warning amber (#FFC107 vibe) */
+  --warn: oklch(0.84 0.17 85);
+
+  /* Legacy alias — kept so existing class names still resolve, now mapped to mint */
+  --cyan: var(--mint);
+  --carbon: oklch(0.13 0.002 270);
+  --success: var(--mint);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body {
+    background-color: var(--color-carbon);
+    color: var(--color-foreground);
+    font-family: var(--font-mono);
+  }
+}
+
+/* Flat matte panel — replaces former carbon-fiber texture */
+.carbon-fiber {
+  background-color: oklch(0.20 0.003 270);
+  background-image: none;
+}
+
+/* Color utilities — cyan aliases now resolve to mint */
+.text-cyan { color: var(--color-mint); }
+.bg-cyan { background-color: var(--color-mint); }
+.border-cyan { border-color: var(--color-mint); }
+.text-mint { color: var(--color-mint); }
+.bg-mint { background-color: var(--color-mint); }
+.border-mint { border-color: var(--color-mint); }
+.text-warn { color: var(--color-warn); }
+.bg-warn { background-color: var(--color-warn); }
+.border-warn { border-color: var(--color-warn); }
+.text-racing-red { color: var(--color-racing-red); }
+.bg-racing-red { background-color: var(--color-racing-red); }
+.border-racing-red { border-color: var(--color-racing-red); }
+
+/* Glow utilities neutralized — flat HCI look */
+.glow-cyan,
+.glow-red { box-shadow: none; }
+
+/* Animations */
+@keyframes pulse-red {
+  0%, 100% { background-color: color-mix(in oklab, var(--color-racing-red) 18%, transparent); }
+  50%      { background-color: color-mix(in oklab, var(--color-racing-red) 34%, transparent); }
+}
+.pulse-red { animation: pulse-red 1.1s ease-in-out infinite; }
+
+@keyframes pulse-yellow {
+  0%, 100% { background-color: color-mix(in oklab, var(--color-warn) 18%, transparent); }
+  50%      { background-color: color-mix(in oklab, var(--color-warn) 34%, transparent); }
+}
+.pulse-yellow { animation: pulse-yellow 1.1s ease-in-out infinite; }
+
+@keyframes scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+.scan-line { animation: scan 2.4s linear infinite; }
+
+@keyframes flash-red {
+  0%, 100% { fill: var(--color-racing-red); opacity: 1; }
+  50% { fill: oklch(0.78 0.22 25); opacity: 0.6; }
+}
+.tyre-flash { animation: flash-red 0.6s ease-in-out infinite; }
+
+@keyframes blink-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.blink { animation: blink-dot 1s ease-in-out infinite; }
+
+.grid-bg {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--color-mint) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--color-mint) 12%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Pressable button affordance — flat, no glow */
+.pressable { transition: transform 60ms ease-out, filter 60ms ease-out; }
+.pressable:active { transform: scale(0.98); filter: brightness(1.1); }
+
+/* Tyre aura pulse for 3D wireframe (kept for SVG fallback) */
+@keyframes tyre-aura {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.18); }
+}
+.tyre-aura { animation: tyre-aura 0.7s ease-in-out infinite; transform-origin: center; }
+
+/* Video feed grain + scanlines for POV */
+@keyframes grain-shift {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(-2%, 1%); }
+  50% { transform: translate(1%, -2%); }
+  75% { transform: translate(-1%, 2%); }
+  100% { transform: translate(0,0); }
+}
+.video-grain::after {
+  content: ""; position: absolute; inset: -10%;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 3px);
+  mix-blend-mode: overlay; pointer-events: none;
+  animation: grain-shift 0.8s steps(4) infinite;
+}
+
+@keyframes hold-fill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* LED segment gauge */
+.led-seg {
+  display: block;
+  border-radius: 1px;
+  background: oklch(0.26 0.004 270);
+  box-shadow: inset 0 0 0 1px oklch(0.14 0.002 270);
+}
+.led-seg.on-mint   { background: var(--color-mint); }
+.led-seg.on-warn   { background: var(--color-warn); }
+.led-seg.on-red    { background: var(--color-racing-red); }
