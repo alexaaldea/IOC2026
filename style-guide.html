@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0b0d;
+    --bg2: #111318;
+    --bg3: #181c22;
+    --bg4: #1e242d;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --green: #39FF7A;
+    --green-dim: #1a7a3a;
+    --cyan: #00D4FF;
+    --orange: #FF7A00;
+    --red: #FF3B3B;
+    --yellow: #FFD600;
+    --white: #F0F2F5;
+    --muted: #5a6370;
+    --muted2: #8a939e;
+    --mono: 'Share Tech Mono', monospace;
+    --cond: 'Barlow Condensed', sans-serif;
+    --body: 'Barlow', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--body);
+    font-size: 14px;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 32px 64px;
+  }
+
+  .header {
+    border-bottom: 1px solid var(--border2);
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .header-left .eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .header-left h1 {
+    font-family: var(--cond);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .header-left h1 span {
+    color: var(--green);
+  }
+
+  .header-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  .live-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-right: 5px;
+    vertical-align: middle;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .section {
+    margin-bottom: 52px;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-title {
+    font-family: var(--cond);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  /* COLOR PALETTE */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .color-swatch {
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .swatch-block {
+    height: 64px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 8px 10px;
+  }
+
+  .swatch-role {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    text-transform: uppercase;
+  }
+
+  .swatch-meta {
+    padding: 10px 12px;
+    background: var(--bg3);
+  }
+
+  .swatch-name {
+    font-family: var(--cond);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .swatch-hex {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted2);
+  }
+
+  .swatch-usage {
+    font-size: 10px;
+    color: var(--muted2);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* status bar */
+  .status-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .status-chip {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 5px 12px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .chip-ok { background: rgba(57,255,122,0.12); color: var(--green); border: 1px solid rgba(57,255,122,0.3); }
+  .chip-warn { background: rgba(255,214,0,0.1); color: var(--yellow); border: 1px solid rgba(255,214,0,0.25); }
+  .chip-crit { background: rgba(255,59,59,0.12); color: var(--red); border: 1px solid rgba(255,59,59,0.3); }
+  .chip-info { background: rgba(0,212,255,0.08); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
+  .chip-neutral { background: var(--bg3); color: var(--muted2); border: 1px solid var(--border); }
+
+  /* TYPOGRAPHY */
+  .type-showcase {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .type-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 120px;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 20px;
+  }
+
+  .type-row:last-child { border-bottom: none; }
+
+  .type-meta .type-role {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 3px;
+  }
+
+  .type-meta .type-spec {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+  }
+
+  .type-sample { color: var(--white); }
+
+  .type-device {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  .t-display {
+    font-family: var(--cond);
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .t-heading {
+    font-family: var(--cond);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .t-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+
+  .t-data {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cyan);
+    letter-spacing: -0.01em;
+  }
+
+  .t-data-sm {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--muted2);
+    letter-spacing: 0.03em;
+  }
+
+  .t-body {
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted2);
+    line-height: 1.6;
+  }
+
+  .t-alert {
+    font-family: var(--cond);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+
+  /* ICONS */
+  .icon-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .icon-family {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+  }
+
+  .icon-family-title {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+
+  .icon-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .icon-item {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+  }
+
+  .icon-item svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .icon-item-sm {
+    width: 28px;
+    height: 28px;
+  }
+
+  .icon-item-sm svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .icon-desc {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* COMPONENT EXAMPLES */
+  .component-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .comp-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+
+  .comp-label {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  /* Metric readout */
+  .metric-readout {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .metric-val {
+    font-family: var(--mono);
+    font-size: 32px;
+    color: var(--cyan);
+    line-height: 1;
+  }
+
+  .metric-unit {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted2);
+  }
+
+  .metric-name {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  /* Tire block */
+  .tire-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .tire-cell {
+    background: var(--bg4);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 8px 10px;
+  }
+
+  .tire-pos {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .tire-temp-ok { font-family: var(--mono); font-size: 18px; color: var(--green); }
+  .tire-temp-warn { font-family: var(--mono); font-size: 18px; color: var(--yellow); }
+  .tire-temp-crit { font-family: var(--mono); font-size: 18px; color: var(--red); }
+
+  /* Alert item */
+  .alert-item {
+    border-left: 2px solid;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .alert-crit { border-color: var(--red); background: rgba(255,59,59,0.07); }
+  .alert-warn { border-color: var(--yellow); background: rgba(255,214,0,0.06); }
+  .alert-info { border-color: var(--green); background: rgba(57,255,122,0.05); }
+
+  .alert-text {
+    font-family: var(--cond);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .alert-sub {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted2);
+    margin-top: 2px;
+  }
+
+  /* DEVICE SURFACE TABLE */
+  .device-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .device-table th {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    padding: 8px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .device-table td {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted2);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .device-table td:first-child {
+    font-family: var(--cond);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .device-table tr:last-child td { border-bottom: none; }
+
+  /* SPACING */
+  .spacing-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .spacing-row:last-child { border-bottom: none; }
+
+  .spacing-bar-wrap {
+    flex: 1;
+    height: 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  .spacing-bar {
+    height: 4px;
+    background: var(--green-dim);
+    border-right: 2px solid var(--green);
+    position: relative;
+  }
+
+  .spacing-val {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    width: 40px;
+    flex-shrink: 0;
+  }
+
+  .spacing-name {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  .spacing-use {
+    font-size: 10px;
+    color: var(--muted);
+    flex: 1;
+  }
+
+  /* MOTION */
+  .motion-list {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .motion-row {
+    display: grid;
+    grid-template-columns: 160px 100px 1fr;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    gap: 16px;
+  }
+
+  .motion-row:last-child { border-bottom: none; }
+
+  .motion-name {
+    font-family: var(--cond);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .motion-val {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--cyan);
+  }
+
+  .motion-use {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 40px 0;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* Watchface preview */
+  .watch-preview {
+    background: #0d0f12;
+    border: 2px solid #2a2e36;
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .watch-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .watch-val { font-family: var(--mono); font-size: 20px; color: var(--orange); }
+  .watch-lbl { font-family: var(--mono); font-size: 7px; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+
+  .watch-timer { font-family: var(--mono); font-size: 28px; color: var(--green); text-align: center; padding: 8px 0; }
+  .watch-sub { font-family: var(--mono); font-size: 8px; color: var(--muted); text-align: center; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
+
+  .watch-btn {
+    background: rgba(255,122,0,0.15);
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 4px;
+  }
+
+  /* IMPLEMENTATION AUDIT */
+  .audit-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .audit-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px;
+  }
+
+  .audit-title {
+    font-family: var(--cond);
+    font-size: 14px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .audit-sub {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--green);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .audit-list {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted2);
+    line-height: 1.7;
+  }
+
+  .audit-list div { margin-bottom: 4px; }
+
+  /* TOKEN BRIDGE */
+  .token-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .token-table th {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border2);
+    vertical-align: top;
+  }
+
+  .token-table td {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted2);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .token-table tr:last-child td { border-bottom: none; }
+
+  .token-swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  /* THRESHOLDS */
+  .threshold-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .threshold-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+
+  .threshold-title {
+    font-family: var(--cond);
+    font-size: 14px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .threshold-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+  }
+
+  .threshold-row:last-child { border-bottom: none; }
+
+  .threshold-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted2);
+  }
+
+  .threshold-val {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--white);
+    line-height: 1.5;
+  }
+
+  /* INTERACTION PATTERNS */
+  .pattern-list {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .pattern-row {
+    display: grid;
+    grid-template-columns: 190px 1fr 180px;
+    gap: 14px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .pattern-row:last-child { border-bottom: none; }
+
+  .pattern-name {
+    font-family: var(--cond);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .pattern-desc {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted2);
+    line-height: 1.7;
+  }
+
+  .pattern-surface {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--green);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.7;
+    text-align: right;
+  }
+
+  /* COMPONENT INVENTORY */
+  .inventory-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .inventory-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px;
+  }
+
+  .inventory-title {
+    font-family: var(--cond);
+    font-size: 14px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .inventory-item {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted2);
+    line-height: 1.7;
+    border-bottom: 1px solid var(--border);
+    padding: 5px 0;
+  }
+
+  .inventory-item:last-child { border-bottom: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .page { padding: 28px 18px 40px; }
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .header-left h1 { font-size: 34px; }
+    .header-meta { text-align: left; }
+    .palette-grid,
+    .icon-section,
+    .component-grid,
+    .inventory-grid,
+    .threshold-grid,
+    .audit-grid,
+    .two-col { grid-template-columns: 1fr; }
+    .type-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .type-device { text-align: left; }
+    .motion-row,
+    .pattern-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .pattern-surface { text-align: left; }
+    .threshold-row { grid-template-columns: 1fr; }
+  }
+
+  .footnote {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow"><span class="live-dot"></span>F1 Pit Crew AR System — Design Language</div>
+      <h1>APEX <span>·</span> STYLE GUIDE</h1>
+    </div>
+    <div class="header-meta">
+      VERSION 1.1 / IMPLEMENTATION ALIGNED<br>
+      SURFACES: PHONE · TABLET · WATCH · AR · STEERING WHEEL<br>
+      THEME: DARK ONLY
+    </div>
+  </div>
+
+  <!-- COLOR PALETTE -->
+  <div class="section">
+    <div class="section-label">01 — Color System</div>
+
+    <div class="palette-grid">
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#0a0b0d; color:#5a6370;">
+          <span class="swatch-role">Base</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#F0F2F5;">Void</div>
+          <div class="swatch-hex">#0A0B0D</div>
+          <div class="swatch-usage">Page background. Deepest layer. All screens.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#111318; color:#5a6370;">
+          <span class="swatch-role">Surface</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#F0F2F5;">Cockpit</div>
+          <div class="swatch-hex">#111318</div>
+          <div class="swatch-usage">Panel backgrounds, cards, module containers.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#181c22; color:#5a6370;">
+          <span class="swatch-role">Raised</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#F0F2F5;">Grid</div>
+          <div class="swatch-hex">#181C22</div>
+          <div class="swatch-usage">Nested elements, sub-panels, hover states.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#1e242d; color:#5a6370;">
+          <span class="swatch-role">Elevated</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#F0F2F5;">Sector</div>
+          <div class="swatch-hex">#1E242D</div>
+          <div class="swatch-usage">Active cells, selected items, tire blocks.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#39FF7A;">
+          <span class="swatch-role" style="color:#04341a;">Primary</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#39FF7A;">Signal Green</div>
+          <div class="swatch-hex">#39FF7A</div>
+          <div class="swatch-usage">Labels, status OK, live indicators, section headers. Core accent — the "go" signal.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#00D4FF;">
+          <span class="swatch-role" style="color:#003c47;">Data</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#00D4FF;">Telemetry Cyan</div>
+          <div class="swatch-hex">#00D4FF</div>
+          <div class="swatch-usage">Live numeric readouts, speed, RPM, data feeds. Cool precision.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#FF7A00;">
+          <span class="swatch-role" style="color:#3d1d00;">Warning</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#FF7A00;">Pit Orange</div>
+          <div class="swatch-hex">#FF7A00</div>
+          <div class="swatch-usage">Safety car, active CTA buttons, warnings, smartwatch HR.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#FF3B3B;">
+          <span class="swatch-role" style="color:#3d0000;">Critical</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#FF3B3B;">Brake Red</div>
+          <div class="swatch-hex">#FF3B3B</div>
+          <div class="swatch-usage">Critical alerts, overheat, emergency actions, tire failure.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#FFD600;">
+          <span class="swatch-role" style="color:#3d3100;">Caution</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#FFD600;">Yellow Flag</div>
+          <div class="swatch-hex">#FFD600</div>
+          <div class="swatch-usage">High (non-critical) tire temps, caution zone, wear thresholds.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#8B5CF6;">
+          <span class="swatch-role" style="color:#1e0c40;">Strategy</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#8B5CF6;">Strategy Purple</div>
+          <div class="swatch-hex">#8B5CF6</div>
+          <div class="swatch-usage">AI strategist readouts, sector highlights, lap delta info.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#F0F2F5;">
+          <span class="swatch-role" style="color:#5a6370;">Primary Text</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#F0F2F5;">Race White</div>
+          <div class="swatch-hex">#F0F2F5</div>
+          <div class="swatch-usage">Headlines, driver name, key labels. Max legibility.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#5a6370;">
+          <span class="swatch-role" style="color:#1a1d21;">Muted</span>
+        </div>
+        <div class="swatch-meta">
+          <div class="swatch-name" style="color:#8a939e;">Pit Wall Gray</div>
+          <div class="swatch-hex">#5A6370 / #8A939E</div>
+          <div class="swatch-usage">Secondary labels, units, metadata, channel names.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 16px;">
+      <div class="comp-label" style="margin-bottom: 10px;">Status signal chips (used across all surfaces)</div>
+      <div class="status-row">
+        <div class="status-chip chip-ok"><span class="live-dot"></span> OPTIMAL / LIVE</div>
+        <div class="status-chip chip-warn">HIGH / CAUTION</div>
+        <div class="status-chip chip-crit">CRITICAL / OVERHEAT</div>
+        <div class="status-chip chip-info">TELEMETRY / SYNC</div>
+        <div class="status-chip chip-neutral">IDLE / PENDING</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="section">
+    <div class="section-label">02 — Typography</div>
+
+    <div class="type-showcase">
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Display / Title</div>
+          <div class="type-spec">Barlow Condensed 700<br>36–48px · Uppercase · ls 0.04em</div>
+        </div>
+        <div class="type-sample t-display">APEX · COCKPIT</div>
+        <div class="type-device">Tablet HUD<br>Phone Header<br>AR Panel Title</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Section Heading</div>
+          <div class="type-spec">Barlow Condensed 600<br>18–22px · Uppercase · ls 0.06em</div>
+        </div>
+        <div class="type-sample t-heading">TIRE SYSTEM</div>
+        <div class="type-device">All surfaces<br>Panel headers</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Data Readout</div>
+          <div class="type-spec">Share Tech Mono 400<br>24–36px · Cyan · ls -0.01em</div>
+        </div>
+        <div class="type-sample t-data">12661</div>
+        <div class="type-device">Tablet · Phone<br>Smartwatch<br>Wheel HUD</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Field Label</div>
+          <div class="type-spec">Share Tech Mono 400<br>9–11px · Green · ls 0.2em · UPPERCASE</div>
+        </div>
+        <div class="type-sample t-label">FUEL KG · ERS · SECTOR 1</div>
+        <div class="type-device">All surfaces<br>Section tags<br>Status labels</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Secondary Data</div>
+          <div class="type-spec">Share Tech Mono 400<br>12–14px · Muted gray</div>
+        </div>
+        <div class="type-sample t-data-sm">L28 · CH 1 · ENGINEER · 5.8GHz</div>
+        <div class="type-device">Metadata<br>Timestamps<br>Identifiers</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Body / Comms</div>
+          <div class="type-spec">Barlow 300<br>12–13px · Muted · lh 1.6</div>
+        </div>
+        <div class="type-sample t-body">Negative, stay out. Push for 2 more.</div>
+        <div class="type-device">Radio transcript<br>Engineer notes<br>Strategy text</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-role">Alert Message</div>
+          <div class="type-spec">Barlow Condensed 700<br>13–16px · Red · Uppercase · ls 0.1em</div>
+        </div>
+        <div class="type-sample t-alert">REAR-LEFT TYRE OVERHEAT — 138°C</div>
+        <div class="type-device">All surfaces<br>Critical banners</div>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 16px; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px;">
+      <div class="comp-label" style="margin-bottom: 10px;">Font pairing rationale</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+        <div>
+          <div style="font-family: var(--cond); font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; color: var(--white);">Barlow Condensed</div>
+          <div style="font-family: var(--mono); font-size: 9px; color: var(--muted); line-height: 1.6;">Structural hierarchy. Militaristic, compact, authoritative. Used for all human-readable titles, headings, and team communication.</div>
+        </div>
+        <div>
+          <div style="font-family: var(--mono); font-size: 15px; color: var(--cyan); margin-bottom: 6px;">Share Tech Mono</div>
+          <div style="font-family: var(--mono); font-size: 9px; color: var(--muted); line-height: 1.6;">Machine-generated data feel. All sensor outputs, timestamps, IDs, and numeric telemetry use monospace to imply precision and authenticity.</div>
+        </div>
+        <div>
+          <div style="font-family: var(--body); font-size: 15px; font-weight: 300; color: var(--muted2); margin-bottom: 6px;">Barlow Light</div>
+          <div style="font-family: var(--mono); font-size: 9px; color: var(--muted); line-height: 1.6;">Human voice layer. Radio transcripts, engineer instructions. Light weight differentiates spoken word from system data.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ICONOGRAPHY -->
+  <div class="section">
+    <div class="section-label">03 — Iconography</div>
+
+    <div class="icon-section">
+
+      <div class="icon-family">
+        <div class="icon-family-title">Functional Icons — Outline · 18px</div>
+        <div class="icon-grid">
+          <!-- Tyre icon -->
+          <div class="icon-item" style="background: var(--bg4);">
+            <svg viewBox="0 0 18 18" fill="none" stroke="#39FF7A" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="9" cy="9" r="7"/>
+              <circle cx="9" cy="9" r="3"/>
+              <line x1="9" y1="2" x2="9" y2="6"/>
+              <line x1="9" y1="12" x2="9" y2="16"/>
+            </svg>
+          </div>
+          <!-- Radio -->
+          <div class="icon-item" style="background: var(--bg4);">
+            <svg viewBox="0 0 18 18" fill="none" stroke="#39FF7A" stroke-width="1.5" stroke-linecap="round">
+              <rect x="2" y="7" width="14" height="9" rx="2"/>
+              <circle cx="7" cy="12" r="2"/>
+              <line x1="10" y1="10" x2="14" y2="10"/>
+              <line x1="10" y1="13" x2="14" y2="13"/>
+              <path d="M4 7 Q9 1 14 7"/>
+            </svg>
+          </div>
+          <!-- Pit -->
+          <div class="icon-item" style="background: var(--bg4);">
+            <svg viewBox="0 0 18 18" fill="none" stroke="#39FF7A" stroke-width="1.5" stroke-linecap="round">
+              <path d="M2 14 L9 4 L16 14"/>
+              <line x1="5" y1="14" x2="13" y2="14"/>
+              <line x1="9" y1="9" x2="9" y2="14"/>
+            </svg>
+          </div>
+          <!-- Fuel -->
+          <div class="icon-item" style="background: var(--bg4);">
+            <svg viewBox="0 0 18 18" fill="none" stroke="#39FF7A" stroke-width="1.5" stroke-linecap="round">
+              <rect x="3" y="5" width="9" height="11" rx="1.5"/>
+              <path d="M12 8 L15 8 L15 12 Q16 12 16 11 L16 9"/>
+              <line x1="3" y1="9" x2="12" y2="9"/>
+            </svg>
+          </div>
+          <!-- ERS bolt -->
+          <div class="icon-item" style="background: var(--bg4);">
+            <svg viewBox="0 0 18 18" fill="none" stroke="#39FF7A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 2 L6 10 L10 10 L7 16 L13 7 L9 7 Z"/>
+            </svg>
+          </div>
+          <!-- Watch -->
+          <div class="icon-item" style="background: var(--bg4);">
+            <svg viewBox="0 0 18 18" fill="none" stroke="#39FF7A" stroke-width="1.5" stroke-linecap="round">
+              <rect x="5" y="5" width="8" height="8" rx="2"/>
+              <line x1="7" y1="3" x2="11" y2="3"/>
+              <line x1="7" y1="15" x2="11" y2="15"/>
+              <line x1="9" y1="7.5" x2="9" y2="9.5" stroke-width="1.8"/>
+              <line x1="9" y1="9.5" x2="11" y2="9.5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="icon-desc">Stroke: 1.5px · Color: Signal Green (#39FF7A) on dark surface. All icons use consistent geometry derived from F1/motorsport semantics. No filled icons on primary surfaces.</div>
+      </div>
+
+      <div class="icon-family">
+        <div class="icon-family-title">Status Indicators — 8px dots &amp; bars</div>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="width:8px; height:8px; border-radius:50%; background: var(--green); display: inline-block;"></span>
+            <span style="font-family: var(--mono); font-size: 9px; color: var(--green);">LIVE / OPTIMAL / CONNECTED</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="width:8px; height:8px; border-radius:50%; background: var(--yellow); display: inline-block;"></span>
+            <span style="font-family: var(--mono); font-size: 9px; color: var(--yellow);">HIGH / DEGRADING / CAUTION</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="width:8px; height:8px; border-radius:50%; background: var(--red); display: inline-block;"></span>
+            <span style="font-family: var(--mono); font-size: 9px; color: var(--red);">CRITICAL / OVERHEAT / FAIL</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="width:8px; height:8px; border-radius:50%; background: var(--cyan); display: inline-block;"></span>
+            <span style="font-family: var(--mono); font-size: 9px; color: var(--cyan);">SYNC / DATA / AR ACTIVE</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="width:8px; height:8px; border-radius:50%; background: var(--muted); display: inline-block;"></span>
+            <span style="font-family: var(--mono); font-size: 9px; color: var(--muted);">IDLE / OFFLINE / PENDING</span>
+          </div>
+        </div>
+        <div class="icon-desc">Dot indicators replace text labels where space is minimal (AR overlay, smartwatch). Animated pulse only on LIVE green dot. All other states static.</div>
+      </div>
+
+      <div class="icon-family">
+        <div class="icon-family-title">AR Overlay Icons — Minimal · 14px</div>
+        <div class="icon-grid">
+          <div class="icon-item icon-item-sm" style="background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);">
+            <svg viewBox="0 0 14 14" fill="none" stroke="#00D4FF" stroke-width="1.4" stroke-linecap="round">
+              <path d="M2 7 Q7 2 12 7 Q7 12 2 7"/>
+              <circle cx="7" cy="7" r="2"/>
+            </svg>
+          </div>
+          <div class="icon-item icon-item-sm" style="background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);">
+            <svg viewBox="0 0 14 14" fill="none" stroke="#00D4FF" stroke-width="1.4" stroke-linecap="round">
+              <polygon points="7,2 12,12 2,12"/>
+            </svg>
+          </div>
+          <div class="icon-item icon-item-sm" style="background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);">
+            <svg viewBox="0 0 14 14" fill="none" stroke="#00D4FF" stroke-width="1.4" stroke-linecap="round">
+              <circle cx="7" cy="7" r="4"/>
+              <line x1="7" y1="3" x2="7" y2="5"/>
+              <line x1="7" y1="9" x2="7" y2="11"/>
+              <line x1="3" y1="7" x2="5" y2="7"/>
+              <line x1="9" y1="7" x2="11" y2="7"/>
+            </svg>
+          </div>
+          <div class="icon-item icon-item-sm" style="background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);">
+            <svg viewBox="0 0 14 14" fill="none" stroke="#00D4FF" stroke-width="1.4" stroke-linecap="round">
+              <path d="M7 2 L7 8 M4 5 L7 2 L10 5"/>
+              <rect x="2" y="9" width="10" height="3" rx="1"/>
+            </svg>
+          </div>
+        </div>
+        <div class="icon-desc">AR overlay icons: ultra-thin 1.4px stroke, Cyan tint. Lower visual weight to avoid occluding real-world content. No fill — transparency mandatory on headset glass.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPONENT LIBRARY -->
+  <div class="section">
+    <div class="section-label">04 — UI Components</div>
+
+    <div class="component-grid">
+
+      <div class="comp-card">
+        <div class="comp-label">Tire Temperature Module</div>
+        <div class="tire-grid">
+          <div class="tire-cell">
+            <div class="tire-pos">FL · C3 SOFT</div>
+            <div class="tire-temp-ok">107°</div>
+            <div style="font-family: var(--mono); font-size: 8px; color: var(--muted); margin-top: 3px;">WEAR 51%</div>
+          </div>
+          <div class="tire-cell">
+            <div class="tire-pos">FR · C3 SOFT</div>
+            <div class="tire-temp-warn">105°</div>
+            <div style="font-family: var(--mono); font-size: 8px; color: var(--muted); margin-top: 3px;">WEAR 53%</div>
+          </div>
+          <div class="tire-cell">
+            <div class="tire-pos">RL · C3 SOFT</div>
+            <div class="tire-temp-ok">77°</div>
+            <div style="font-family: var(--mono); font-size: 8px; color: var(--muted); margin-top: 3px;">WEAR 48%</div>
+          </div>
+          <div class="tire-cell">
+            <div class="tire-pos">RR · C3 SOFT</div>
+            <div class="tire-temp-crit">138°</div>
+            <div style="font-family: var(--mono); font-size: 8px; color: var(--red); margin-top: 3px;">▲ OVERHEAT</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-label">Alert Feed</div>
+        <div class="alert-item alert-crit">
+          <div class="alert-text" style="color: var(--red);">REAR-LEFT TYRE OVERHEAT — 138°C</div>
+          <div class="alert-sub">L28 · AUTO-DETECTED · PIT RECOMMENDED</div>
+        </div>
+        <div class="alert-item alert-warn">
+          <div class="alert-text" style="color: var(--yellow);">MEDIUM TYRE LOSING PACE IN 4 LAPS</div>
+          <div class="alert-sub">L28 · STRATEGIST AI — ARES V4.2</div>
+        </div>
+        <div class="alert-item alert-info">
+          <div class="alert-text" style="color: var(--green);">PIT WINDOW OPTIMAL IN 2 LAPS</div>
+          <div class="alert-sub">L28 · 87% CONFIDENCE MODEL</div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-label">Live Metric Readout</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+          <div>
+            <div class="metric-name">SPEED</div>
+            <div class="metric-readout">
+              <div class="metric-val">250</div>
+              <div class="metric-unit">KPH</div>
+            </div>
+          </div>
+          <div>
+            <div class="metric-name">RPM</div>
+            <div class="metric-readout">
+              <div class="metric-val">12661</div>
+            </div>
+          </div>
+          <div>
+            <div class="metric-name">GEAR</div>
+            <div class="metric-readout">
+              <div class="metric-val">7</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 12px;">
+          <div class="metric-name" style="margin-bottom: 4px;">THROTTLE</div>
+          <div style="height: 4px; background: var(--bg4); border-radius: 2px; overflow: hidden;">
+            <div style="width: 55%; height: 100%; background: var(--green);"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-label">Smartwatch Preview</div>
+        <div class="watch-preview">
+          <div class="watch-row">
+            <div><div class="watch-lbl">SPD</div><div class="watch-val" style="font-size:14px; color:var(--white);">290</div></div>
+            <div><div class="watch-lbl">GEAR</div><div class="watch-val" style="font-size:14px; color:var(--white);">7</div></div>
+            <div><div class="watch-lbl">TYR</div><div class="watch-val" style="font-size:14px; color:var(--red);">123.3</div></div>
+          </div>
+          <div class="watch-timer">0:18</div>
+          <div class="watch-sub">CAR #44 INBOUND</div>
+          <div class="watch-btn">■ PAUSE STREAM</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DEVICE SURFACES -->
+  <div class="section">
+    <div class="section-label">05 — Device Surface Specs</div>
+
+    <div style="background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;">
+      <table class="device-table">
+        <thead>
+          <tr>
+            <th>Surface</th>
+            <th>Resolution / Size</th>
+            <th>Primary Data Shown</th>
+            <th>Typography Scale</th>
+            <th>Interaction Model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tablet / Phone</td>
+            <td>375–768px wide<br>Full dark panels</td>
+            <td>All telemetry, tire map, strategy, radio, 3D car model, pit input</td>
+            <td>Display 36px<br>Data 28–32px<br>Label 10px</td>
+            <td>Touch: tap, swipe, drag-to-rotate 3D. Toggle switches. Confirm flows.</td>
+          </tr>
+          <tr>
+            <td>Smartwatch</td>
+            <td>~38mm · Square / Rounded rect</td>
+            <td>Pit ETA countdown, SPD, GEAR, TYR, HR, engineer radio log</td>
+            <td>Data 20–28px<br>Label 7–9px<br>Buttons 9px mono</td>
+            <td>Digital crown scroll. Single-tap confirm. Haptic alerts. No keyboard.</td>
+          </tr>
+          <tr>
+            <td>AR Glasses / HUD</td>
+            <td>FOV overlay<br>Transparent glass</td>
+            <td>Speed, gear, sector delta, tire color overlay, pit window, AI alerts</td>
+            <td>Display 42px+<br>Labels 10px<br>Cyan-on-void only</td>
+            <td>Voice + gaze. Minimal tap surfaces. Transparency-first: no solid bgs on key data.</td>
+          </tr>
+          <tr>
+            <td>Pit Wall Tablet</td>
+            <td>1440px+ wide<br>Multi-panel</td>
+            <td>Full race HUD, ARES AI strategy panel, team radio, analytics, spatial view</td>
+            <td>Same as tablet<br>Denser grids allowed</td>
+            <td>Mouse + keyboard. Multi-window drag. Keyboard shortcuts for pit mode, DRS, overtake.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SPACING + MOTION -->
+  <div class="two-col">
+    <div class="section">
+      <div class="section-label">06 — Spacing Scale</div>
+      <div style="background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px;">
+        <div class="spacing-row">
+          <div class="spacing-val">4px</div>
+          <div class="spacing-bar-wrap"><div class="spacing-bar" style="width: 4px;"></div></div>
+          <div class="spacing-name">xs</div>
+          <div class="spacing-use">Icon-to-text, dot gaps</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-val">8px</div>
+          <div class="spacing-bar-wrap"><div class="spacing-bar" style="width: 32px;"></div></div>
+          <div class="spacing-name">sm</div>
+          <div class="spacing-use">Intra-component padding</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-val">12px</div>
+          <div class="spacing-bar-wrap"><div class="spacing-bar" style="width: 48px;"></div></div>
+          <div class="spacing-name">md</div>
+          <div class="spacing-use">Alert rows, chip gaps</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-val">16px</div>
+          <div class="spacing-bar-wrap"><div class="spacing-bar" style="width: 64px;"></div></div>
+          <div class="spacing-name">lg</div>
+          <div class="spacing-use">Card padding, grid gaps</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-val">24px</div>
+          <div class="spacing-bar-wrap"><div class="spacing-bar" style="width: 96px;"></div></div>
+          <div class="spacing-name">xl</div>
+          <div class="spacing-use">Between major sections</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-val">40px</div>
+          <div class="spacing-bar-wrap"><div class="spacing-bar" style="width: 140px;"></div></div>
+          <div class="spacing-name">2xl</div>
+          <div class="spacing-use">Page section separators</div>
+        </div>
+      </div>
+      <div style="margin-top: 12px; font-family: var(--mono); font-size: 9px; color: var(--muted); line-height: 1.7;">
+        Border radius: 2px (cells/chips), 4px (panels), 6px (cards), 14px (watch frame).<br>
+        Borders: 1px solid rgba(255,255,255,0.07) default · 0.13 alpha for emphasis · 2px solid for active selection.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">07 — Motion Tokens</div>
+      <div class="motion-list">
+        <div class="motion-row">
+          <div class="motion-name" style="color: var(--white);">Live Pulse</div>
+          <div class="motion-val">1.4s ease-in-out ∞</div>
+          <div class="motion-use">LIVE dot indicator. Opacity 1→0.3→1. Signals active data stream.</div>
+        </div>
+        <div class="motion-row">
+          <div class="motion-name" style="color: var(--white);">Alert Flash</div>
+          <div class="motion-val">0.6s ease 3×</div>
+          <div class="motion-use">Critical alert banner background. Red opacity flash to draw attention on entry.</div>
+        </div>
+        <div class="motion-row">
+          <div class="motion-name" style="color: var(--white);">Data Update</div>
+          <div class="motion-val">80ms linear</div>
+          <div class="motion-use">Numeric readout color flash (cyan→white→cyan) when telemetry value changes.</div>
+        </div>
+        <div class="motion-row">
+          <div class="motion-name" style="color: var(--white);">Panel Slide</div>
+          <div class="motion-val">200ms ease-out</div>
+          <div class="motion-use">Side panel open/close on tablet. Translate X from edge. No bounce.</div>
+        </div>
+        <div class="motion-row">
+          <div class="motion-name" style="color: var(--white);">Screen Fade</div>
+          <div class="motion-val">150ms ease</div>
+          <div class="motion-use">Tab/surface transitions. Opacity 0→1. No slide on AR (motion sickness).</div>
+        </div>
+        <div class="motion-row">
+          <div class="motion-name" style="color: var(--white);">Bar Fill</div>
+          <div class="motion-val">400ms ease-out</div>
+          <div class="motion-use">Throttle/brake/ERS progress bars on initial load. Staggered 50ms delay.</div>
+        </div>
+      </div>
+      <div style="margin-top: 12px; font-family: var(--mono); font-size: 9px; color: var(--muted); line-height: 1.7;">
+        AR headset: disable all translate animations. Use opacity only.<br>
+        Smartwatch: haptic feedback replaces visual motion for critical events.
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPLEMENTATION ALIGNMENT -->
+  <div class="section">
+    <div class="section-label">08 — Implementation Alignment</div>
+    <div class="audit-grid">
+      <div class="audit-card">
+        <div class="audit-sub">mobile app / code</div>
+        <div class="audit-title">Phone + Pit Wall</div>
+        <div class="audit-list">
+          <div>Tailwind semantic tokens mapped to CSS variables.</div>
+          <div>Mint is canonical success/primary state.</div>
+          <div>Key modules: telemetry, strategy, comms, race-state bar.</div>
+          <div>Critical flows use hold-to-confirm + haptic feedback.</div>
+        </div>
+      </div>
+      <div class="audit-card">
+        <div class="audit-sub">MR_HeadSet / code</div>
+        <div class="audit-title">AR Headset HUD</div>
+        <div class="audit-list">
+          <div>Glassmorphism panels with cyan edge brackets.</div>
+          <div>Orbitron/Rajdhani display pairing for sci-fi HUD layer.</div>
+          <div>Draggable holographic panels with pin/hide controls.</div>
+          <div>Pit Mode overlay defines emergency high-attention state.</div>
+        </div>
+      </div>
+      <div class="audit-card">
+        <div class="audit-sub">smartwatch / code</div>
+        <div class="audit-title">Crew Watch</div>
+        <div class="audit-list">
+          <div>High-contrast mono interface inside rounded bezel.</div>
+          <div>Glow status emitted from dashboard state to watch shell.</div>
+          <div>Critical alerts use pulse-red + acknowledge action.</div>
+          <div>Scanline texture kept subtle for readability.</div>
+        </div>
+      </div>
+      <div class="audit-card">
+        <div class="audit-sub">steering wheel / code</div>
+        <div class="audit-title">Cockpit Wheel HUD</div>
+        <div class="audit-list">
+          <div>Rajdhani/Oswald display typography for hardware style.</div>
+          <div>15-segment shift lights with green/yellow/red progression.</div>
+          <div>Dial, push-button, and status LEDs mimic physical controls.</div>
+          <div>Telemetry thresholds include cold/ok/warn/critical tyres.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOKEN BRIDGE -->
+  <div class="section">
+    <div class="section-label">09 — Cross-App Token Bridge</div>
+    <div style="margin-bottom: 14px; font-family: var(--mono); font-size: 9px; color: var(--muted); line-height: 1.7;">
+      All apps use semantic token naming via CSS variables. Values differ per surface, but intent is stable.
+    </div>
+    <table class="token-table">
+      <thead>
+        <tr>
+          <th>Semantic Token</th>
+          <th>Primary Intent</th>
+          <th>Mobile App</th>
+          <th>MR Headset</th>
+          <th>Smartwatch</th>
+          <th>Steering Wheel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="token-swatch" style="background:#39FF7A;"></span>primary / success</td>
+          <td>healthy state, go, active system</td>
+          <td>--mint / --primary</td>
+          <td>--hud-green / --primary</td>
+          <td>--color-pit-green</td>
+          <td>--primary / --gain</td>
+        </tr>
+        <tr>
+          <td><span class="token-swatch" style="background:#00D4FF;"></span>data / info</td>
+          <td>telemetry numerics, data channel</td>
+          <td>--cyan alias to mint in current build</td>
+          <td>--hud-cyan / --hud-blue</td>
+          <td>neutral (text-first), no dedicated cyan token</td>
+          <td>--info</td>
+        </tr>
+        <tr>
+          <td><span class="token-swatch" style="background:#FFD600;"></span>warning</td>
+          <td>degradation, caution, near-limit</td>
+          <td>--warn</td>
+          <td>--hud-amber</td>
+          <td>--color-pit-yellow / --color-pit-orange</td>
+          <td>--warn / --gear</td>
+        </tr>
+        <tr>
+          <td><span class="token-swatch" style="background:#FF3B3B;"></span>critical</td>
+          <td>overheat, emergency, abort</td>
+          <td>--racing-red / --destructive</td>
+          <td>--hud-red / --destructive</td>
+          <td>--color-pit-red</td>
+          <td>--loss / --destructive</td>
+        </tr>
+        <tr>
+          <td><span class="token-swatch" style="background:#5A6370;"></span>muted</td>
+          <td>metadata, secondary labels</td>
+          <td>--muted-foreground</td>
+          <td>--muted-foreground</td>
+          <td>--color-pit-muted</td>
+          <td>--muted-foreground</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- OPERATIONAL THRESHOLDS -->
+  <div class="section">
+    <div class="section-label">10 — Operational Thresholds</div>
+    <div class="threshold-grid">
+      <div class="threshold-card">
+        <div class="threshold-title" style="color: var(--green);">Tyre Temperature Logic</div>
+        <div class="threshold-row">
+          <div class="threshold-tag">mobile map</div>
+          <div class="threshold-val">Optimal 80-115C, warning 115-130C, critical above 130C.</div>
+        </div>
+        <div class="threshold-row">
+          <div class="threshold-tag">wheel HUD</div>
+          <div class="threshold-val">Cold below 70C, optimal 70-110C, warning 110-125C, critical above 125C.</div>
+        </div>
+        <div class="threshold-row">
+          <div class="threshold-tag">alert copy</div>
+          <div class="threshold-val">Critical copy must include tire position + measured value + recommended action.</div>
+        </div>
+      </div>
+
+      <div class="threshold-card">
+        <div class="threshold-title" style="color: var(--cyan);">System + Race States</div>
+        <div class="threshold-row">
+          <div class="threshold-tag">race states</div>
+          <div class="threshold-val">Practice, Qualifying, Race, Safety Car: segmented control drives HUD behavior presets.</div>
+        </div>
+        <div class="threshold-row">
+          <div class="threshold-tag">sync states</div>
+          <div class="threshold-val">Connected devices must expose signal + battery + explicit connect/disconnect affordance.</div>
+        </div>
+        <div class="threshold-row">
+          <div class="threshold-tag">pit mode</div>
+          <div class="threshold-val">Emergency mode uses red border pulse, checklist progression, and visible abort path.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTION -->
+  <div class="section">
+    <div class="section-label">11 — Interaction Patterns</div>
+    <div class="pattern-list">
+      <div class="pattern-row">
+        <div class="pattern-name">Hold To Confirm</div>
+        <div class="pattern-desc">Use for destructive pit actions (example: ABORT STOP). Minimum hold duration 1500ms. Requires explicit completion feedback and toast event.</div>
+        <div class="pattern-surface">phone · pit wall</div>
+      </div>
+      <div class="pattern-row">
+        <div class="pattern-name">Draggable Holo Panels</div>
+        <div class="pattern-desc">Panels support pointer drag, pin-to-lock, and hide controls. Motion entry uses blur + scale with 0.5s ease-out for spatial legibility.</div>
+        <div class="pattern-surface">MR headset</div>
+      </div>
+      <div class="pattern-row">
+        <div class="pattern-name">Critical Alert Acknowledge</div>
+        <div class="pattern-desc">Critical watch alerts present large icon pulse, system label, value, and a single acknowledge button. Haptic pattern is mandatory.</div>
+        <div class="pattern-surface">smartwatch</div>
+      </div>
+      <div class="pattern-row">
+        <div class="pattern-name">Hardware-Mimic Controls</div>
+        <div class="pattern-desc">Wheel UI uses tactile visual cues (bevel, inset shadow, active LED ring, short press travel) to emulate physical cockpit controls.</div>
+        <div class="pattern-surface">steering wheel</div>
+      </div>
+      <div class="pattern-row">
+        <div class="pattern-name">Stateful Banner Routing</div>
+        <div class="pattern-desc">Primary alert banner is clickable and routes to relevant deep screen (telemetry/strategy) while triggering haptic confirmation.</div>
+        <div class="pattern-surface">phone</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPONENT INVENTORY -->
+  <div class="section">
+    <div class="section-label">12 — Component Inventory (Current Codebase)</div>
+    <div class="inventory-grid">
+      <div class="inventory-card">
+        <div class="inventory-title">Mobile App Modules</div>
+        <div class="inventory-item">AppShell + PageHeader + BottomNav</div>
+        <div class="inventory-item">RaceStateBar (Practice/Qualifying/Race/Safety Car)</div>
+        <div class="inventory-item">F1Car3D + CarWireframe (hot tyre signaling)</div>
+        <div class="inventory-item">LiveChart + LedGauge + TyreMap</div>
+        <div class="inventory-item">SyncButton + HoldToConfirm + ActivePitStop</div>
+        <div class="inventory-item">Comms waveform cards + floating mic trigger</div>
+      </div>
+      <div class="inventory-card">
+        <div class="inventory-title">MR Headset Modules</div>
+        <div class="inventory-item">HoloPanel (drag/pin/hide + accent states)</div>
+        <div class="inventory-item">DriverStream + telemetry gauges + tire/brake grids</div>
+        <div class="inventory-item">ScreenSwitcher (race/strategy/crew/analytics/replay/settings)</div>
+        <div class="inventory-item">PitModeOverlay (countdown + checklist + danger zones)</div>
+        <div class="inventory-item">Spatial notifications + AI feed + radio feed streams</div>
+      </div>
+      <div class="inventory-card">
+        <div class="inventory-title">Smartwatch Modules</div>
+        <div class="inventory-item">WatchFace shell with dynamic glow state</div>
+        <div class="inventory-item">Dashboard with tactical telemetry blocks</div>
+        <div class="inventory-item">AlertScreen (critical pulse + acknowledge)</div>
+        <div class="inventory-item">Waveform visualization for comms channel</div>
+      </div>
+      <div class="inventory-card">
+        <div class="inventory-title">Steering Wheel Modules</div>
+        <div class="inventory-item">ShiftLights (15 segment progressive bands)</div>
+        <div class="inventory-item">TireIndicator with cold/ok/warn/crit mapping</div>
+        <div class="inventory-item">Dial controls + push/action buttons</div>
+        <div class="inventory-item">Vertical bars for fuel/ERS/engine status</div>
+        <div class="inventory-item">Phase tabs for qualifying/race/safety presets</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    APEX · F1 PIT CREW AR SYSTEM — HCI STYLE GUIDE v1.1 · DARK-ONLY · IMPLEMENTATION ALIGNED
+  </div>
+
+</div>
+</body>
+</html>
