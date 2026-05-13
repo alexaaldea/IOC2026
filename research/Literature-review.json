@@ -1,0 +1,100 @@
+{
+  "literatureReviews": [
+    {
+      "id": "de6259ae-559f-4732-86ca-be5852bb5ebc",
+      "resourceName": "The Application of Augmented Reality in the Automotive Industry: A Systematic Literature Review",
+      "resourceUrl": "https://www.mdpi.com/2076-3417/10/12/4259",
+      "resourceInsights": "The review shows that AR interfaces can enhance human–computer interaction in complex automotive tasks by presenting contextual, in-situ information that reduces the need for attention switching.\n\nAR systems support hands-free interaction (especially via head-mounted displays), which improves usability and task flow in environments where manual interaction is constrained.\n\nStudies reviewed indicate improvements in user performance, task completion time, and error reduction, suggesting that well-designed AR interfaces can lower cognitive and physical workload.\n\nThe paper highlights the importance of information placement, visual hierarchy, and minimalism to avoid cognitive overload, especially when users operate under time pressure.\n\nUsability challenges such as visual clutter, poor legibility, latency, and tracking inaccuracies directly affect user trust and interaction quality.\n\nMost existing studies focus on single-user interactions, revealing a lack of research on collaborative AR interfaces and shared situational awareness.",
+      "comments": "The lack of research on real-time, multi-user coordination highlights a clear research gap that this project addresses by exploring AR-supported collaboration between pit crew members and the driver.\n\nThis source is valuable for framing design decisions around usability, cognitive load, and interaction efficiency, rather than purely technical feasibility.",
+      "createdAt": "2026-02-26T07:01:28.735Z"
+    },
+    {
+      "id": "c61f295b-7290-465f-9929-18d44c271637",
+      "resourceName": "Extended reality in the automotive sector: A bibliometric analysis of publications from 2012 to 2022",
+      "resourceUrl": "https://www.sciencedirect.com/science/article/pii/S2405844024009915?fr=RR-2&ref=pdf_download&rr=97ee7dd02a217f8b",
+      "resourceInsights": "This paper is a bibliometric analysis mapping research trends in Extended Reality (XR) — including AR, VR, and MR — within the automotive domain from 2012 to 2022, showing a rapidly expanding field of study and growing interest in XR human–technology interaction use cases.\n\nXR research has escalated especially in the last five years, reflecting increasing interest in immersive, interactive systems that combine digital content with real-world automotive tasks.\n\nAnalysis of keywords and trends shows strong emphasis on head-mounted displays (HMDs), human‐computer interaction, driving simulators, and head-up displays (HUDs) — devices and interfaces that directly relate to how users perceive, interact with, and respond to augmented digital information.\n\nThe co-occurrence mapping reveals clusters connected to interaction and visualization, such as VR visualization, AR navigation, and systems involving human interaction with virtual elements, which are relevant for UX and interface design.\n\nXR applications span training, safety, ergonomics, and user behavior, suggesting that HCI research in the automotive context is not just about technology but how humans engage with it in simulated and real environments.",
+      "comments": "As a bibliometric study, this work does not deeply analyze user studies or interface effectiveness, but it highlights where HCI research is concentrated and where opportunities exist — especially in real-time interactive systems and immersive displays, which are core to your AR headset and wearable visualization design.\n\nThe prominence of terms like head-mounted display, driving simulators, and ergonomics suggests that the research community prioritizes user experience, sensory immersion, and intuitive interaction models in XR automotive research — all highly applicable to your context.\n\nThis paper shows an interdisciplinary blend of HCI, engineering, computer science, and ergonomics. For your review, you can cite it to justify why AR/VR research isn’t just technical but rooted in user interaction concerns and how your project fits within broader trends.",
+      "createdAt": "2026-02-26T07:05:02.149Z"
+    },
+    {
+      "id": "c3938a7d-64b9-428d-8306-848472c31993",
+      "resourceName": "Exploring Augmented Reality HMD Telemetry Data Visualization for Strategy Optimization in Student Solar-Powered Car Racing",
+      "resourceUrl": "https://www.mdpi.com/1996-1073/18/12/3196",
+      "resourceInsights": "This study empirically compares three telemetry visualization modalities: a basic web dashboard, an advanced graphical web interface, and an augmented reality head-mounted display (AR HMD) during racing strategy tasks derived from real solar-racing telemetry data.\n\nThe AR HMD visualization showed distinct advantages in certain decision-making tasks, especially for less experienced users, indicating that AR can support speed and accuracy of strategic interpretation more effectively for novices compared to traditional interfaces.\n\nThe user study measured multiple HCI-relevant outcomes: reaction time, decision adequacy, cognitive workload (NASA TLX), and usability (SUS). This provides a more nuanced view of how interface type influences human performance, not just task outcomes.\n\nWhile advanced web interfaces often performed well overall, AR HMDs excelled in specific short-notice decision tasks, such as recognizing rapid events (e.g., tire punctures), showing how immersion and contextual visualization can improve situated awareness.\n\nCognitive workload profiles varied across interfaces: AR tended to impose higher physical/temporal demand but yielded strong performance results, suggesting a trade-off between embodied interaction and cognitive efficiency.\n\nThe study highlights the importance of experience level in interpreting complex data. In several tasks, less experienced users significantly benefited from AR, which supports the idea that interface modality can interact with user expertise to shape performance and learning curves.",
+      "comments": "The controlled task-based experimental design strengthens this paper as HCI evidence because it systematically evaluates how real humans interact with real race data across multiple performance and cognitive metrics.\n\nResults emphasize that different interface modalities influence perception, workload, and decision confidence differently — a core concern in HCI when designing systems for high-stakes, time-pressured environments.\n\nThis work provides practical insights into contextual AR visualization design: for instance, placing telemetry in spatially relevant locations (e.g., mapped onto 3D models) can support rapid comprehension of multi-dimensional signals, potentially reducing attention switching compared to flat dashboards.\n\nThe mixed outcomes in usability scores (AR sometimes lower than advanced web) illustrate HCI complexities: objective performance improvements do not always align with subjective usability perceptions, an important consideration when designing real team workflows.",
+      "createdAt": "2026-02-26T07:08:53.843Z"
+    },
+    {
+      "id": "586cf175-fa69-45a7-882f-095c374c222d",
+      "resourceName": "Radio UI",
+      "resourceUrl": "https://www.redbullracing.com/int-en/bulls-guide-to-team-radio",
+      "resourceInsights": "how teams communicate using the radio",
+      "comments": "",
+      "createdAt": "2026-02-26T07:04:27.728Z"
+    },
+    {
+      "id": "d042a787-5760-4611-8c3c-5ab79bf5c109",
+      "resourceName": "Pervasive Augmented Reality to support real-time data monitoring in industrial scenarios: Shop floor visualization evaluation and user study",
+      "resourceUrl": "https://www.sciencedirect.com/science/article/pii/S0097849323002686/",
+      "resourceInsights": "Industrial AR for data visualization and monitoring; compares AR vs. web interfaces",
+      "comments": "",
+      "createdAt": "2026-02-26T07:05:31.829Z"
+    },
+    {
+      "id": "47eca461-ff3c-4c48-a359-e70badaddab9",
+      "resourceName": "An Integrated Mobile Augmented Reality Digital Twin Monitoring System",
+      "resourceUrl": "https://www.mdpi.com/2073-431X/10/8/99",
+      "resourceInsights": "AR for real-time monitoring using mobile devices.",
+      "comments": "",
+      "createdAt": "2026-02-26T07:07:43.483Z"
+    },
+    {
+      "id": "6375a3e1-968d-4d22-a3b4-20eb797aff69",
+      "resourceName": "Designing for Cross-Device Interactions",
+      "resourceUrl": "https://discovery.ucl.ac.uk/id/eprint/10091079/1/Frederik%20Brudy%20-%20PhD%20Thesis.pdf",
+      "resourceInsights": "Research on interaction designs that span multiple devices (smartphones, wearables, AR)",
+      "comments": "",
+      "createdAt": "2026-02-26T07:10:48.438Z"
+    },
+    {
+      "id": "2503e230-1b03-499d-a5cc-35f82843e7d0",
+      "resourceName": "HCI in Mobile and Wearable Computing – Interface Design & Interaction",
+      "resourceUrl": "https://www.ijert.org/hci-in-mobile-and-wearable-computing",
+      "resourceInsights": "Covers AR, gesture, context awareness, cross-device ties.",
+      "comments": "",
+      "createdAt": "2026-02-26T07:11:26.917Z"
+    },
+    {
+      "id": "8343b7f7-0f4f-4732-b168-1d1248c10d3f",
+      "resourceName": "Visualizing Information on Smartwatch Faces: A Review & Design Space",
+      "resourceUrl": "https://journals.sagepub.com/doi/10.1177/14738716251360339",
+      "resourceInsights": "Systematic overview of smartwatch visualization patterns.",
+      "comments": "",
+      "createdAt": "2026-02-26T07:22:15.000Z"
+    },
+    {
+      "id": "9e8fba11-5e73-4dc5-9f61-4abf2dc3d100",
+      "resourceName": "Augmented reality user interface design and experimental evaluation for human-robot collaborative assembly",
+      "resourceUrl": "https://www.sciencedirect.com/science/article/pii/S0278612523000717",
+      "resourceInsights": "This paper experimentally evaluates AR user interfaces for human-robot collaborative assembly tasks in shared workspaces.\n\nThe study compares visual and haptic AR cues that communicate robot intent and movement to human operators.\n\nResults show that AR interfaces significantly reduce visual attention demand and mental workload during collaboration.\n\nVisual proximity cues were more effective and preferred than haptic feedback in improving perceived safety and usability.\n\nThe paper demonstrates that user trust and perceived usability are closely related in collaborative AR systems.",
+      "comments": "This source is highly relevant because it focuses on real-time collaborative interaction, situational awareness, and workload reduction — all critical factors in pit crew coordination and AR-assisted racing environments.\n\nThe comparison between visual and haptic feedback can help justify design choices for wearable AR interfaces and smartwatch notifications in your project.",
+      "createdAt": "2026-05-13T12:00:00.000Z"
+    },
+    {
+      "id": "7cb1f34a-fdc2-4f94-8d79-7ddbb6c0e101",
+      "resourceName": "AR-based interaction for human-robot collaborative manufacturing",
+      "resourceUrl": "https://www.sciencedirect.com/science/article/pii/S0736584519306225",
+      "resourceInsights": "This research proposes AR-based interfaces for safe and efficient human-robot collaboration in industrial manufacturing.\n\nThe system combines depth-sensor workspace monitoring with wearable AR displays to improve operator awareness.\n\nUser studies showed reductions in both task completion time and robot idle time compared to baseline interaction methods.\n\nThe paper highlights how AR interfaces improve safety communication and ergonomics in collaborative workspaces.\n\nThe findings also reveal limitations of current HoloLens hardware for prolonged industrial use, especially regarding comfort and usability.",
+      "comments": "This source supports the argument that AR can improve coordination efficiency and situational awareness in fast-paced collaborative environments.\n\nThe discussion about safety, ergonomics, and real-time interaction is directly transferable to motorsport pit crew workflows where timing, coordination, and physical movement are critical.",
+      "createdAt": "2026-05-13T12:00:00.000Z"
+    },
+    {
+      "id": "f15ad44c-0df8-46d6-8e2d-0a7bc77f2202",
+      "resourceName": "Design and Evaluation of an Augmented Reality Head-Mounted Display Interface for Human Robot Teams Collaborating in Physically Shared Manufacturing Tasks",
+      "resourceUrl": "https://arxiv.org/abs/2203.08343",
+      "resourceInsights": "This paper evaluates a wearable AR head-mounted display interface designed for collaborative human-robot teamwork in shared physical environments.\n\nThe AR interface reduced physical demand and task completion time while increasing robot utilization efficiency.\n\nResearchers conducted a multi-dimensional usability analysis using established HCI metrics and user studies.\n\nThe study found that AR interfaces felt more intuitive and engaging, though traditional controls were sometimes perceived as more dependable.\n\nThe research emphasizes how freedom of interaction and collaboration style can affect perceived usability and team coordination.",
+      "comments": "This study is especially valuable because it investigates collaborative AR workflows involving multiple agents operating in the same physical environment.\n\nIts findings about task efficiency, physical demand reduction, and interaction design can help support your argument for AR-enhanced communication between drivers and pit crew members during high-pressure racing scenarios.",
+      "createdAt": "2026-05-13T12:00:00.000Z"
+    }
+  ]
+}
